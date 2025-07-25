@@ -1,0 +1,990 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Zigzag Scroll-Animated Product Showcase with Particles
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&amp;family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js">
+  </script>
+  <style>
+   body {
+      font-family: "Montserrat", sans-serif;
+      background: white;
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100vh;
+      color: #1e293b;
+      margin: 0;
+      padding: 0;
+    }
+    main {
+      background: rgba(255 255 255 / 0.95);
+      border-radius: 1rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      padding-top: 3rem;
+      padding-bottom: 5rem;
+      margin: 2rem auto;
+      max-width: 7xl;
+      position: relative;
+      z-index: 10;
+    }
+    /* Hand-drawn style font for product name */
+    .handwritten {
+      font-family: "Indie Flower", cursive;
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: #db2777;
+    }
+    /* Tagline style */
+    .tagline {
+      font-style: italic;
+      color: #fbbf24;
+      font-weight: 600;
+      margin-top: 0.25rem;
+      margin-bottom: 1rem;
+    }
+    /* Product image container for pop out effect */
+    .product-image-wrapper {
+      position: relative;
+      overflow: visible;
+      z-index: 10;
+      filter: drop-shadow(3px 5px 5px rgba(219, 39, 119, 0.3));
+      border-radius: 0.75rem;
+      background: white;
+      border: 3px solid #f9c0d3;
+      box-shadow: 0 8px 15px rgba(219, 39, 119, 0.15);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+    
+    /* Product image styles for scroll effect */
+    .product-image {
+      position: relative;
+      z-index: 20;
+      filter: drop-shadow(3px 5px 5px rgba(219, 39, 119, 0.3));
+      border-radius: 0.75rem;
+      background: white;
+      border: 3px solid #f9c0d3;
+      box-shadow: 0 8px 15px rgba(219, 39, 119, 0.15);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      max-width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+    
+    .product-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(219, 39, 119, 0.25);
+    }
+    
+    /* Scroll effect classes */
+    .scroll-out-left {
+      transform: translateX(-80px) scale(1.15) !important;
+      z-index: 30;
+      box-shadow: 0 15px 30px rgba(219, 39, 119, 0.4) !important;
+    }
+    
+    .scroll-out-right {
+      transform: translateX(80px) scale(1.15) !important;
+      z-index: 30;
+      box-shadow: 0 15px 30px rgba(251, 191, 36, 0.4) !important;
+    }
+    
+    .scroll-out-up {
+      transform: translateY(-50px) scale(1.1) !important;
+      z-index: 30;
+    }
+    
+    .scroll-out-down {
+      transform: translateY(50px) scale(1.1) !important;
+      z-index: 30;
+    }
+    /* Zigzag slide in animations */
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-40px) translateY(-10px);
+      transition: transform 0.7s ease, opacity 0.7s ease;
+    }
+    .slide-in-left.visible {
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+    }
+    .slide-in-right {
+      opacity: 0;
+      transform: translateX(40px) translateY(10px);
+      transition: transform 0.7s ease, opacity 0.7s ease;
+    }
+    .slide-in-right.visible {
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+    }
+    /* Product image pop out diagonal */
+    .pop-out-left {
+      transform: translate(-15px, -15px) rotate(-3deg);
+      box-shadow: 0 12px 20px rgba(219, 39, 119, 0.3);
+      transition: transform 0.7s ease;
+    }
+    .pop-out-right {
+      transform: translate(15px, 15px) rotate(3deg);
+      box-shadow: 0 12px 20px rgba(251, 191, 36, 0.3);
+      transition: transform 0.7s ease;
+    }
+    .pop-out-left.visible {
+      transform: translate(0, 0) rotate(0deg);
+      box-shadow: 0 20px 30px rgba(219, 39, 119, 0.5);
+    }
+    .pop-out-right.visible {
+      transform: translate(0, 0) rotate(0deg);
+      box-shadow: 0 20px 30px rgba(251, 191, 36, 0.5);
+    }
+    /* Button style */
+    .btn-pink {
+      background-color: #db2777;
+      color: white;
+      font-weight: 700;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 8px rgba(219, 39, 119, 0.4);
+      transition: background-color 0.3s ease;
+    }
+    .btn-pink:hover,
+    .btn-pink:focus {
+      background-color: #be185d;
+      outline: none;
+    }
+    /* Responsive zigzag layout */
+    @media (min-width: 768px) {
+      .zigzag-container {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 5rem;
+        position: relative;
+      }
+      .zigzag-left .product-wrapper {
+        grid-column: 1 / span 5;
+        justify-self: start;
+      }
+      .zigzag-left .text-wrapper {
+        grid-column: 7 / span 6;
+        justify-self: start;
+      }
+      .zigzag-right .product-wrapper {
+        grid-column: 8 / span 5;
+        justify-self: end;
+      }
+      .zigzag-right .text-wrapper {
+        grid-column: 1 / span 6;
+        justify-self: start;
+      }
+    }
+    @media (max-width: 767px) {
+      .zigzag-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+      .product-wrapper,
+      .text-wrapper {
+        width: 100%;
+      }
+      .product-image-wrapper {
+        margin: 0 auto;
+        max-width: 280px;
+      }
+    }
+    /* Footer styles */
+    footer {
+      background: rgba(255 255 255 / 0.95);
+      border-top: 1px solid #e5e7eb;
+      padding: 2rem 1rem;
+      font-size: 0.875rem;
+      color: #475569;
+      margin-top: 4rem;
+      position: relative;
+      z-index: 10;
+    }
+    footer a {
+      color: #db2777;
+      transition: color 0.3s ease;
+    }
+    footer a:hover,
+    footer a:focus {
+      color: #be185d;
+      outline: none;
+    }
+    .social-icons a {
+      margin-right: 1rem;
+      font-size: 1.25rem;
+      color: #db2777;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover,
+    .social-icons a:focus {
+      color: #be185d;
+      outline: none;
+    }
+    /* Particles container */
+    .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    /* Section title for "Otro" */
+    .section-title {
+      font-family: 'Indie Flower', cursive;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #db2777;
+      text-align: center;
+      margin: 4rem 0 2rem 0;
+    }
+  </style>
+ </head>
+ <body>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 rounded-lg shadow-lg">
+   <h1 class="text-4xl font-extrabold text-center text-pink-600 mb-12 handwritten">
+    Fruti Ice &amp; Bonice Treats Showcase
+   </h1>
+   <!-- Product 1: Fresa (Strawberry) - Left product, right text, red particles -->
+   <section class="zigzag-container zigzag-left" data-flavor="strawberry">
+    <div class="particles-container" id="particles-1">
+    </div>
+    <div class="product-wrapper slide-in-left" data-animate="slide-in-left">
+     <img alt="Fruti Ice strawberry flavored ice treat in a transparent cup with strawberry pieces and pastel pink background" class="product-image rounded-lg scroll-out-left" height="400" loading="lazy" src="2.png" width="400" data-scroll-direction="left"/>
+    </div>
+    <div class="text-wrapper slide-in-right" data-animate="slide-in-right">
+     <h2 class="handwritten">
+      Fruti Ice Strawberry
+     </h2>
+     <p class="tagline">
+      Sweet &amp; Juicy Delight!
+     </p>
+     <p class="mb-6 leading-relaxed text-slate-700">
+      Enjoy the fresh and sweet taste of strawberry chunks blended into icy refreshment. A perfect summer treat!
+     </p>
+     <ul class="list-disc list-inside text-slate-600 mb-6">
+      <li>
+       Made with real strawberries
+      </li>
+      <li>
+       All-natural ingredients
+      </li>
+      <li>
+       Gluten-free and vegan
+      </li>
+      <li>
+       Refreshing and healthy
+      </li>
+     </ul>
+     <button class="btn-pink focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2">
+      Order Now
+     </button>
+    </div>
+   </section>
+   <!-- Product 2: Limón (Lemon) - Right product, left text, yellow particles -->
+   <section class="zigzag-container zigzag-right" data-flavor="lemon">
+    <div class="particles-container" id="particles-2">
+    </div>
+    <div class="text-wrapper slide-in-left" data-animate="slide-in-left">
+     <h2 class="handwritten text-yellow-500">
+      Bonice Lemon
+     </h2>
+     <p class="tagline text-yellow-400">
+      Zesty &amp; Refreshing!
+     </p>
+     <p class="mb-6 leading-relaxed text-slate-700">
+      Experience the tangy and zesty lemon flavor with a creamy texture. Perfect for a refreshing snack anytime.
+     </p>
+     <ul class="list-disc list-inside text-slate-600 mb-6">
+      <li>
+       Made with real lemon juice
+      </li>
+      <li>
+       Low-fat and creamy
+      </li>
+      <li>
+       Perfect for hot days
+      </li>
+      <li>
+       Great for family gatherings
+      </li>
+     </ul>
+     <button class="btn-pink focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2">
+      Contact Us
+     </button>
+    </div>
+    <div class="product-wrapper slide-in-right" data-animate="slide-in-right">
+     <img alt="Bonice lemon creamy ice treat in pastel yellow cup with lemon slice decoration and yellow highlight background" class="product-image rounded-lg scroll-out-right" height="400" loading="lazy" src="1.png" width="400" data-scroll-direction="right"/>
+    </div>
+   </section>
+   <!-- Product 3: Uva (Grape) - Left product, right text, purple particles -->
+   <section class="zigzag-container zigzag-left" data-flavor="grape">
+    <div class="particles-container" id="particles-3">
+    </div>
+    <div class="product-wrapper slide-in-left" data-animate="slide-in-left">
+     <img alt="Fruti Ice grape flavored ice treat in a transparent cup with grape pieces and pastel purple background" class="product-image rounded-lg scroll-out-left" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/cb370573-fbcd-4205-0996-a07fb34278cc.jpg" width="400" data-scroll-direction="left"/>
+    </div>
+    <div class="text-wrapper slide-in-right" data-animate="slide-in-right">
+     <h2 class="handwritten" style="color:#7b3fbf;">
+      Fruti Ice Grape
+     </h2>
+     <p class="tagline" style="color:#a78bfa;">
+      Sweet &amp; Juicy Grape Bliss
+     </p>
+     <p class="mb-6 leading-relaxed text-slate-700">
+      Savor the rich grape flavor with icy refreshment. A delicious treat bursting with grape goodness.
+     </p>
+     <ul class="list-disc list-inside text-slate-600 mb-6">
+      <li>
+       Made with real grape juice
+      </li>
+      <li>
+       All-natural ingredients
+      </li>
+      <li>
+       Gluten-free and vegan
+      </li>
+      <li>
+       Perfect for any occasion
+      </li>
+     </ul>
+     <button class="btn-pink focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2">
+      Order Now
+     </button>
+    </div>
+   </section>
+   <!-- Product 4: Piña (Pineapple) - Right product, left text, yellow particles -->
+   <section class="zigzag-container zigzag-right" data-flavor="pineapple">
+    <div class="particles-container" id="particles-4">
+    </div>
+    <div class="text-wrapper slide-in-left" data-animate="slide-in-left">
+     <h2 class="handwritten text-yellow-500">
+      Bonice Pineapple
+     </h2>
+     <p class="tagline text-yellow-400">
+      Tropical &amp; Sweet!
+     </p>
+     <p class="mb-6 leading-relaxed text-slate-700">
+      Enjoy the tangy sweetness of pineapple combined with creamy delight. A tropical treat for all ages.
+     </p>
+     <ul class="list-disc list-inside text-slate-600 mb-6">
+      <li>
+       Made with real pineapple chunks
+      </li>
+      <li>
+       Low-fat and creamy
+      </li>
+      <li>
+       Perfect for summer days
+      </li>
+      <li>
+       Great for parties and snacks
+      </li>
+     </ul>
+     <button class="btn-pink focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2">
+      Contact Us
+     </button>
+    </div>
+    <div class="product-wrapper slide-in-right" data-animate="slide-in-right">
+     <img alt="Bonice pineapple creamy ice treat in pastel yellow cup with pineapple decoration and yellow highlight background" class="product-image rounded-lg scroll-out-right" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/32bc1806-b8d5-4738-004c-60b52ffa671f.jpg" width="400" data-scroll-direction="right"/>
+    </div>
+   </section>
+   <!-- Product 5: Mora Azul (Blueberry) - Left product, right text, blue particles -->
+   <section class="zigzag-container zigzag-left" data-flavor="blueberry">
+    <div class="particles-container" id="particles-5">
+    </div>
+    <div class="product-wrapper slide-in-left" data-animate="slide-in-left">
+     <img alt="Fruti Ice blueberry flavored ice treat in a transparent cup with blueberry pieces and pastel blue background" class="product-image rounded-lg scroll-out-left" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/95ef6d98-cbc5-4499-6e9f-a3ed9f2fb4fb.jpg" width="400" data-scroll-direction="left"/>
+    </div>
+    <div class="text-wrapper slide-in-right" data-animate="slide-in-right">
+     <h2 class="handwritten" style="color:#3b82f6;">
+      Fruti Ice Blueberry
+     </h2>
+     <p class="tagline" style="color:#93c5fd;">
+      Fresh &amp; Antioxidant Rich
+     </p>
+     <p class="mb-6 leading-relaxed text-slate-700">
+      Enjoy the antioxidant-rich blueberry flavor blended into a refreshing icy treat.
+     </p>
+     <ul class="list-disc list-inside text-slate-600 mb-6">
+      <li>
+       Made with real blueberries
+      </li>
+      <li>
+       All-natural ingredients
+      </li>
+      <li>
+       Gluten-free and vegan
+      </li>
+      <li>
+       Healthy and delicious
+      </li>
+     </ul>
+     <button class="btn-pink focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2">
+      Order Now
+     </button>
+    </div>
+   </section>
+   <!-- Product 6: Frambuesa (Raspberry) - Right product, left text, red particles -->
+   <section class="zigzag-container zigzag-right" data-flavor="raspberry">
+    <div class="particles-container" id="particles-6">
+    </div>
+    <div class="text-wrapper slide-in-left" data-animate="slide-in-left">
+     <h2 class="handwritten text-yellow-500" style="color:#ef4444;">
+      Bonice Raspberry
+     </h2>
+     <p class="tagline text-yellow-400" style="color:#fca5a5;">
+      Sweet &amp; Tangy
+     </p>
+     <p class="mb-6 leading-relaxed text-slate-700">
+      Indulge in the sweet and tangy raspberry flavor with creamy texture. A perfect treat for raspberry lovers.
+     </p>
+     <ul class="list-disc list-inside text-slate-600 mb-6">
+      <li>
+       Made with fresh raspberry puree
+      </li>
+      <li>
+       Low-fat and smooth
+      </li>
+      <li>
+       Contains real dairy
+      </li>
+      <li>
+       Great for snacks and desserts
+      </li>
+     </ul>
+     <button class="btn-pink focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2">
+      Contact Us
+     </button>
+    </div>
+    <div class="product-wrapper slide-in-right" data-animate="slide-in-right">
+     <img alt="Bonice raspberry creamy ice treat in pastel red cup with raspberry decoration and red highlight background" class="product-image rounded-lg scroll-out-right" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/1f2ea368-dd3e-4dff-90e8-5a3204d5a903.jpg" width="400" data-scroll-direction="right"/>
+    </div>
+   </section>
+   <!-- Product 7: Naranja (Orange) - Left product, right text, orange particles -->
+   <section class="zigzag-container zigzag-left" data-flavor="orange">
+    <div class="particles-container" id="particles-7">
+    </div>
+    <div class="product-wrapper slide-in-left" data-animate="slide-in-left">
+     <img alt="Fruti Ice orange flavored ice treat in a transparent cup with orange slices and pastel orange background" class="product-image rounded-lg scroll-out-left" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/1ca3baa9-4e90-4939-4520-0301849f9d12.jpg" width="400" data-scroll-direction="left"/>
+    </div>
+    <div class="text-wrapper slide-in-right" data-animate="slide-in-right">
+     <h2 class="handwritten" style="color:#f97316;">
+      Fruti Ice Orange
+     </h2>
+     <p class="tagline" style="color:#fdba74;">
+      Citrus &amp; Refreshing
+     </p>
+     <p class="mb-6 leading-relaxed text-slate-700">
+      Enjoy the zesty and refreshing orange flavor blended into a cool icy treat.
+     </p>
+     <ul class="list-disc list-inside text-slate-600 mb-6">
+      <li>
+       Made with real orange juice
+      </li>
+      <li>
+       All-natural ingredients
+      </li>
+      <li>
+       Gluten-free and vegan
+      </li>
+      <li>
+       Perfect for any time of day
+      </li>
+     </ul>
+     <button class="btn-pink focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2">
+      Order Now
+     </button>
+    </div>
+   </section>
+
+   <!-- New Section Title "Otro" -->
+   <h2 class="section-title">
+    Otro
+   </h2>
+
+   <!-- New Product Section with Naranja (Orange) inside "Otro" -->
+   <section class="zigzag-container zigzag-right" data-flavor="orange" style="margin-bottom: 6rem;">
+    <div class="particles-container" id="particles-8">
+    </div>
+    <div class="text-wrapper slide-in-left" data-animate="slide-in-left">
+     <h2 class="handwritten" style="color:#f97316;">
+      Fruti Ice Orange
+     </h2>
+     <p class="tagline" style="color:#fdba74;">
+      Citrus &amp; Refreshing
+     </p>
+     <p class="mb-6 leading-relaxed text-slate-700">
+      Enjoy the zesty and refreshing orange flavor blended into a cool icy treat.
+     </p>
+     <ul class="list-disc list-inside text-slate-600 mb-6">
+      <li>
+       Made with real orange juice
+      </li>
+      <li>
+       All-natural ingredients
+      </li>
+      <li>
+       Gluten-free and vegan
+      </li>
+      <li>
+       Perfect for any time of day
+      </li>
+     </ul>
+     <button class="btn-pink focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2">
+      Order Now
+     </button>
+    </div>
+    <div class="product-wrapper slide-in-right" data-animate="slide-in-right">
+     <img alt="Fruti Ice orange flavored ice treat in a transparent cup with orange slices and pastel orange background" class="product-image rounded-lg scroll-out-right" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/1ca3baa9-4e90-4939-4520-0301849f9d12.jpg" width="400" data-scroll-direction="right"/>
+    </div>
+   </section>
+  </main>
+  <footer class="text-center">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-6">
+     <p class="font-semibold text-pink-600 mb-2">
+      Contact Us
+     </p>
+     <p>
+      Email:
+      <a href="mailto:info@frutiandbonice.com">
+       info@frutiandbonice.com
+      </a>
+     </p>
+     <p>
+      Phone:
+      <a href="tel:+1234567890">
+       +1 (234) 567-890
+      </a>
+     </p>
+     <p>
+      Address: 123 Ice Treat Lane, Sweet City, CA 90210
+     </p>
+    </div>
+    <div class="social-icons mb-6">
+     <a aria-label="Facebook" href="https://facebook.com/frutiandbonice" rel="noopener noreferrer" target="_blank">
+      <i class="fab fa-facebook-f">
+      </i>
+     </a>
+     <a aria-label="Twitter" href="https://twitter.com/frutiandbonice" rel="noopener noreferrer" target="_blank">
+      <i class="fab fa-twitter">
+      </i>
+     </a>
+     <a aria-label="Instagram" href="https://instagram.com/frutiandbonice" rel="noopener noreferrer" target="_blank">
+      <i class="fab fa-instagram">
+      </i>
+     </a>
+     <a aria-label="LinkedIn" href="https://linkedin.com/company/frutiandbonice" rel="noopener noreferrer" target="_blank">
+      <i class="fab fa-linkedin-in">
+      </i>
+     </a>
+    </div>
+    <p class="text-gray-500 text-sm">
+     © 2024 Fruti &amp; Bonice Treats. All rights reserved.
+    </p>
+    <p class="text-gray-400 text-xs mt-1">
+     Legal Disclaimer: Products may contain allergens. Please check ingredients before ordering.
+    </p>
+   </div>
+  </footer>
+  <script>
+   document.addEventListener("DOMContentLoaded", () => {
+      let lastScrollTop = 0;
+      let scrollDirection = 'down';
+      
+      // Scroll direction detection
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scrollDirection = scrollTop > lastScrollTop ? 'down' : 'up';
+        lastScrollTop = scrollTop;
+        
+        // Apply scroll effects to product images
+        const productImages = document.querySelectorAll('.product-image');
+        productImages.forEach(img => {
+          const rect = img.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          
+          // Check if image is in viewport
+          if (rect.top < windowHeight && rect.bottom > 0) {
+            const scrollDirectionAttr = img.getAttribute('data-scroll-direction');
+            
+            if (scrollDirection === 'down') {
+              // Apply scroll out effect based on direction
+              if (scrollDirectionAttr === 'left') {
+                img.classList.add('scroll-out-left');
+                img.classList.remove('scroll-out-right', 'scroll-out-up', 'scroll-out-down');
+              } else if (scrollDirectionAttr === 'right') {
+                img.classList.add('scroll-out-right');
+                img.classList.remove('scroll-out-left', 'scroll-out-up', 'scroll-out-down');
+              }
+            } else {
+              // Remove all scroll effects when scrolling up
+              img.classList.remove('scroll-out-left', 'scroll-out-right', 'scroll-out-up', 'scroll-out-down');
+            }
+          }
+        });
+      });
+
+      const options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.15,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const animType = el.getAttribute("data-animate");
+            if (animType) {
+              el.classList.add("visible");
+              observer.unobserve(el);
+            }
+          }
+        });
+      }, options);
+
+      // Observe all elements with data-animate attribute
+      const animElements = document.querySelectorAll("[data-animate]");
+      animElements.forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Particles.js configurations by flavor color with increased visibility
+      const particlesConfigs = {
+        strawberry: {
+          particles: {
+            number: { value: 70, density: { enable: true, value_area: 900 } },
+            color: { value: "#ff4d6d" },
+            shape: {
+              type: "circle",
+              stroke: { width: 0, color: "#000000" },
+              polygon: { nb_sides: 5 },
+            },
+            opacity: {
+              value: 0.9,
+              random: true,
+              anim: { enable: true, speed: 1, opacity_min: 0.4, sync: false },
+            },
+            size: {
+              value: 6,
+              random: true,
+              anim: { enable: true, speed: 4, size_min: 2, sync: false },
+            },
+            line_linked: { enable: false },
+            move: {
+              enable: true,
+              speed: 3,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "canvas",
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              repulse: { distance: 120, duration: 0.6 },
+              push: { particles_nb: 6 },
+            },
+          },
+          retina_detect: true,
+        },
+        lemon: {
+          particles: {
+            number: { value: 70, density: { enable: true, value_area: 900 } },
+            color: { value: "#fff44f" },
+            shape: {
+              type: "circle",
+              stroke: { width: 0, color: "#000000" },
+              polygon: { nb_sides: 5 },
+            },
+            opacity: {
+              value: 0.9,
+              random: true,
+              anim: { enable: true, speed: 1, opacity_min: 0.4, sync: false },
+            },
+            size: {
+              value: 6,
+              random: true,
+              anim: { enable: true, speed: 4, size_min: 2, sync: false },
+            },
+            line_linked: { enable: false },
+            move: {
+              enable: true,
+              speed: 3,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "canvas",
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              repulse: { distance: 120, duration: 0.6 },
+              push: { particles_nb: 6 },
+            },
+          },
+          retina_detect: true,
+        },
+        grape: {
+          particles: {
+            number: { value: 70, density: { enable: true, value_area: 900 } },
+            color: { value: "#7b3fbf" },
+            shape: {
+              type: "circle",
+              stroke: { width: 0, color: "#000000" },
+              polygon: { nb_sides: 5 },
+            },
+            opacity: {
+              value: 0.9,
+              random: true,
+              anim: { enable: true, speed: 1, opacity_min: 0.4, sync: false },
+            },
+            size: {
+              value: 6,
+              random: true,
+              anim: { enable: true, speed: 4, size_min: 2, sync: false },
+            },
+            line_linked: { enable: false },
+            move: {
+              enable: true,
+              speed: 3,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "canvas",
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              repulse: { distance: 120, duration: 0.6 },
+              push: { particles_nb: 6 },
+            },
+          },
+          retina_detect: true,
+        },
+        pineapple: {
+          particles: {
+            number: { value: 70, density: { enable: true, value_area: 900 } },
+            color: { value: "#fff44f" },
+            shape: {
+              type: "circle",
+              stroke: { width: 0, color: "#000000" },
+              polygon: { nb_sides: 5 },
+            },
+            opacity: {
+              value: 0.9,
+              random: true,
+              anim: { enable: true, speed: 1, opacity_min: 0.4, sync: false },
+            },
+            size: {
+              value: 6,
+              random: true,
+              anim: { enable: true, speed: 4, size_min: 2, sync: false },
+            },
+            line_linked: { enable: false },
+            move: {
+              enable: true,
+              speed: 3,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "canvas",
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              repulse: { distance: 120, duration: 0.6 },
+              push: { particles_nb: 6 },
+            },
+          },
+          retina_detect: true,
+        },
+        blueberry: {
+          particles: {
+            number: { value: 70, density: { enable: true, value_area: 900 } },
+            color: { value: "#3b82f6" },
+            shape: {
+              type: "circle",
+              stroke: { width: 0, color: "#000000" },
+              polygon: { nb_sides: 5 },
+            },
+            opacity: {
+              value: 0.9,
+              random: true,
+              anim: { enable: true, speed: 1, opacity_min: 0.4, sync: false },
+            },
+            size: {
+              value: 6,
+              random: true,
+              anim: { enable: true, speed: 4, size_min: 2, sync: false },
+            },
+            line_linked: { enable: false },
+            move: {
+              enable: true,
+              speed: 3,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "canvas",
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              repulse: { distance: 120, duration: 0.6 },
+              push: { particles_nb: 6 },
+            },
+          },
+          retina_detect: true,
+        },
+        raspberry: {
+          particles: {
+            number: { value: 70, density: { enable: true, value_area: 900 } },
+            color: { value: "#ef4444" },
+            shape: {
+              type: "circle",
+              stroke: { width: 0, color: "#000000" },
+              polygon: { nb_sides: 5 },
+            },
+            opacity: {
+              value: 0.9,
+              random: true,
+              anim: { enable: true, speed: 1, opacity_min: 0.4, sync: false },
+            },
+            size: {
+              value: 6,
+              random: true,
+              anim: { enable: true, speed: 4, size_min: 2, sync: false },
+            },
+            line_linked: { enable: false },
+            move: {
+              enable: true,
+              speed: 3,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "canvas",
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              repulse: { distance: 120, duration: 0.6 },
+              push: { particles_nb: 6 },
+            },
+          },
+          retina_detect: true,
+        },
+        orange: {
+          particles: {
+            number: { value: 70, density: { enable: true, value_area: 900 } },
+            color: { value: "#f97316" },
+            shape: {
+              type: "circle",
+              stroke: { width: 0, color: "#000000" },
+              polygon: { nb_sides: 5 },
+            },
+            opacity: {
+              value: 0.9,
+              random: true,
+              anim: { enable: true, speed: 1, opacity_min: 0.4, sync: false },
+            },
+            size: {
+              value: 6,
+              random: true,
+              anim: { enable: true, speed: 4, size_min: 2, sync: false },
+            },
+            line_linked: { enable: false },
+            move: {
+              enable: true,
+              speed: 3,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "canvas",
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              repulse: { distance: 120, duration: 0.6 },
+              push: { particles_nb: 6 },
+            },
+          },
+          retina_detect: true,
+        },
+      };
+
+      // Initialize particles for each product section
+      for (let i = 1; i <= 8; i++) {
+        const section = document.querySelector(`section:nth-of-type(${i})`);
+        if (!section) continue;
+        const flavor = section.getAttribute("data-flavor");
+        const containerId = `particles-${i}`;
+        if (particlesConfigs[flavor]) {
+          particlesJS(containerId, particlesConfigs[flavor]);
+        }
+      }
+    });
+  </script>
+ </body>
+</html>
