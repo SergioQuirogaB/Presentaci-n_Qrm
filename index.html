@@ -26,8 +26,8 @@
     </script>
     <style>
         @keyframes glow {
-            from { text-shadow: 2px 2px 4px rgba(219, 39, 119, 0.3); }
-            to { text-shadow: 2px 2px 20px rgba(219, 39, 119, 0.6), 0 0 30px rgba(219, 39, 119, 0.4); }
+            from { text-shadow: 2px 2px 4px rgba(0, 187, 212, 0.3); }
+            to { text-shadow: 2px 2px 20px rgba(0, 187, 212, 0.6), 0 0 30px rgba(0, 187, 212, 0.4); }
         }
         @keyframes shimmer {
             0% { opacity: 0.7; }
@@ -40,38 +40,24 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 min-h-screen font-sans">
+<body class="bg-gradient-to-br from-cyan-100 via-blue-100 to-teal-100 min-h-screen font-sans">
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-4">
-                    <h1 class="text-2xl font-bold text-pink-600 font-handwritten">🍦 Fruti Ice & Frutico</h1>
+                    <img alt="Logotipo de Fruti Ice y Frutico, diseño vibrante con frutas y hielo, colores acuáticos y cítricos" class="w-32 h-26 object-contain" height="80" src="assets/Logo.webp" width="80"/>
                 </div>
                 <div class="flex items-center space-x-6">
-                    <a href="fruti-ice.html" class="text-gray-600 hover:text-pink-600 transition-colors">Fruti Ice</a>
-                    <a href="frutico.html" class="text-gray-600 hover:text-pink-600 transition-colors">Frutico</a>
-                    <a href="index.html" class="text-pink-600 font-semibold hover:text-pink-800 transition-colors">Inicio</a>
+                    <a href="fruti-ice.html" class="text-gray-600 hover:text-cyan-600 transition-colors">Fruti Ice</a>
+                    <a href="frutico.html" class="text-gray-600 hover:text-cyan-600 transition-colors">Frutico</a>
+                    <a href="index.html" class="text-cyan-600 font-semibold hover:text-cyan-800 transition-colors">Inicio</a>
                 </div>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 px-4">
-        <div class="max-w-7xl mx-auto text-center">
-            <h1 class="text-5xl md:text-7xl font-bold text-pink-600 font-handwritten animate-glow mb-6">
-                🍦 Fruti Ice & Frutico 🍨
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-700 mb-8 animate-shimmer">
-                Los mejores helados con sabores naturales y cremosos
-            </p>
-            <div class="bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-500 text-white py-4 px-8 rounded-full inline-block animate-pulse">
-                <p class="text-lg font-bold">🔥 ¡OFERTA ESPECIAL! 🔥</p>
-                <p class="text-sm">Compra 2 productos y obtén el 3ro al 50% de descuento</p>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Navigation Cards -->
     <section class="py-16 px-4">
@@ -81,28 +67,18 @@
                 <div class="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-8 transform hover:scale-105 transition-all duration-300">
                     <div class="text-center">
                         <div class="mb-6">
-                            <img src="assets/FresaBG.png" alt="Fruti Ice" 
+                            <img src="assets/Background/Frutice.webp" alt="Fruti Ice" 
                                  class="w-full h-64 object-cover rounded-2xl animate-float shadow-xl">
                         </div>
-                        <h2 class="text-4xl font-bold text-pink-600 font-handwritten mb-4">Fruti Ice</h2>
+                        <h2 class="text-4xl font-bold font-handwritten mb-4 tracking-tight drop-shadow-lg">
+                            <span class="text-red-600 drop-shadow-sm">F</span><span class="text-green-600 drop-shadow-sm">R</span><span class="text-yellow-500 drop-shadow-sm">U</span><span class="text-purple-600 drop-shadow-sm">T</span><span class="text-orange-600 drop-shadow-sm">I</span><span class="text-cyan-600 drop-shadow-sm"> Ice</span>
+                        </h2>
                         <p class="text-gray-600 text-lg mb-6">
-                            Helados refrescantes con trozos de fruta real. Perfectos para días calurosos.
+                            Disfruta el sabor que te encanta, ahora con más cantidad y a un precio imbatible.
+                            Nuestra marca te da más por menos: más sabor, más frescura y más ganancias para tu bolsillo.
+                            ¡Pruébalo hoy y siente la diferencia!
                         </p>
-                        <ul class="text-left space-y-2 mb-8 text-gray-600">
-                            <li class="flex items-center">
-                                <span class="text-pink-500 mr-2">✨</span>
-                                Sabores: Fresa, Mora Azul, Naranja
-                            </li>
-                            <li class="flex items-center">
-                                <span class="text-pink-500 mr-2">✨</span>
-                                Sin gluten y vegano
-                            </li>
-                            <li class="flex items-center">
-                                <span class="text-pink-500 mr-2">✨</span>
-                                Ingredientes naturales
-                            </li>
-                        </ul>
-                        <a href="fruti-ice.html" class="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold py-4 px-8 rounded-full hover:from-pink-600 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 text-lg inline-block">
+                        <a href="fruti-ice.html" class="bg-gradient-to-r from-red-500 via-green-500 via-yellow-400 via-purple-500 via-orange-500 to-cyan-500 text-white font-bold py-4 px-8 rounded-full hover:from-red-600 hover:via-green-600 hover:via-yellow-500 hover:via-purple-600 hover:via-orange-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-300 text-lg inline-block">
                             Ver Fruti Ice
                         </a>
                     </div>
@@ -112,28 +88,14 @@
                 <div class="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-8 transform hover:scale-105 transition-all duration-300">
                     <div class="text-center">
                         <div class="mb-6">
-                            <img src="assets/limonbg.png" alt="Frutico" 
+                            <img src="assets/Background/NaranjaBG.webp" alt="Frutico" 
                                  class="w-full h-64 object-cover rounded-2xl animate-float shadow-xl">
                         </div>
-                        <h2 class="text-4xl font-bold text-yellow-600 font-handwritten mb-4">Frutico</h2>
+                        <h2 class="text-4xl font-bold text-orange-500 font-handwritten mb-4">Frutico</h2>
                         <p class="text-gray-600 text-lg mb-6">
-                            Helados cremosos con sabores tropicales. Deliciosos para cualquier momento.
+                            Disfruta la explosión de sabor a naranja en cada sorbo. Nuestra bebida es más económica, más fresca y te da mayores ganancias. ¡El sabor frutal que todos quieren, al precio que nadie espera!
                         </p>
-                        <ul class="text-left space-y-2 mb-8 text-gray-600">
-                            <li class="flex items-center">
-                                <span class="text-yellow-500 mr-2">✨</span>
-                                Sabores: Limón, Piña
-                            </li>
-                            <li class="flex items-center">
-                                <span class="text-yellow-500 mr-2">✨</span>
-                                Textura cremosa
-                            </li>
-                            <li class="flex items-center">
-                                <span class="text-yellow-500 mr-2">✨</span>
-                                Sabores tropicales
-                            </li>
-                        </ul>
-                        <a href="frutico.html" class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold py-4 px-8 rounded-full hover:from-yellow-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 text-lg inline-block">
+                        <a href="frutico.html" class="bg-gradient-to-r from-orange-500 to-yellow-400 text-white font-bold py-4 px-8 rounded-full hover:from-orange-600 hover:to-yellow-500 transform hover:scale-105 transition-all duration-300 text-lg inline-block">
                             Ver Frutico
                         </a>
                     </div>
@@ -146,26 +108,35 @@
     <footer class="bg-white/80 backdrop-blur-md py-12 px-4">
         <div class="max-w-7xl mx-auto text-center">
             <div class="mb-8">
-                <h3 class="text-2xl font-bold text-pink-600 mb-4">Contáctanos</h3>
+                <h3 class="text-2xl font-bold text-cyan-600 mb-4">Contáctanos</h3>
                 <div class="space-y-2 text-gray-600">
-                    <p>Email: <a href="mailto:info@frutiandfrutico.com" class="text-pink-600 hover:text-pink-800">info@frutiandfrutico.com</a></p>
-                    <p>Teléfono: <a href="tel:+1234567890" class="text-pink-600 hover:text-pink-800">+1 (234) 567-890</a></p>
-                    <p>Dirección: 123 Calle Helado, Ciudad Dulce, CA 90210</p>
+                    <p>Email: <a href="mailto:quiroomar.co@gmail.com" class="text-cyan-600 hover:text-cyan-800">quiroomar.co@gmail.com</a></p>
+                    <p>Teléfono: <a href="tel:+1234567890" class="text-cyan-600 hover:text-cyan-800">(57) 314 354 4656</a></p>
+                    <p>Dirección: Tunja Boyacá, Colombia</p>
                 </div>
             </div>
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="#" class="text-pink-600 hover:text-pink-800 text-2xl transition-colors">
-                    <i class="fab fa-facebook"></i>
+                <a href="https://wa.me/573143544656?text=Hola!%20Quiromar%20quiero%20hacer%20un%20pedido%20y%20me%20gustaría%20saber%20más%20información." target="_blank" class="text-cyan-600 hover:text-cyan-800 text-2xl transition-colors">
+                    <i class="fab fa-whatsapp"></i>
                 </a>
-                <a href="#" class="text-pink-600 hover:text-pink-800 text-2xl transition-colors">
+                <a href="https://www.instagram.com/quiiromar/?next=%2Ffrutiice%2F" class="text-cyan-600 hover:text-cyan-800 text-2xl transition-colors">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="#" class="text-pink-600 hover:text-pink-800 text-2xl transition-colors">
-                    <i class="fab fa-twitter"></i>
-                </a>
             </div>
-            <p class="text-gray-500 text-sm">© 2024 Fruti Ice & Frutico. Todos los derechos reservados.</p>
+            <p class="text-gray-500 text-sm">© 2025 Quiromar Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div class="bg-green-400 text-white px-4 py-2 rounded-lg shadow-lg mb-2 animate-bounce">
+            <span class="text-sm font-bold">¡Pide por aquí! ⬇</span>
+        </div>
+        <a href="https://wa.me/573143544656?text=Hola!%20Quiromar%20quiero%20hacer%20un%20pedido%20y%20me%20gustaría%20saber%20más%20información." 
+           target="_blank" 
+           class="bg-green-400 hover:bg-green-500 text-white w-16 h-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </a>
+    </div>
 </body>
 </html>
