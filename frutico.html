@@ -52,22 +52,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 px-4">
-        <div class="max-w-7xl mx-auto text-center">
-            <h1 class="text-5xl md:text-7xl font-bold text-yellow-600 font-handwritten animate-glow mb-6">
-                Frutico
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-700 mb-8 animate-shimmer">
-                Helados cremosos con sabores tropicales
-            </p>
-            <div class="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 text-white py-4 px-8 rounded-full inline-block animate-pulse">
-                <p class="text-lg font-bold">🔥 ¡OFERTA ESPECIAL! 🔥</p>
-                <p class="text-sm">Compra 2 productos y obtén el 3ro al 50% de descuento</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Product Carousel -->
     <section class="h-screen relative overflow-hidden">
         <!-- Carousel Container -->
@@ -76,9 +60,16 @@
             <div id="carousel-track" class="flex h-full transition-transform duration-700 ease-in-out" style="width: 200%;">
                 <!-- Slide 1: Limón -->
                 <div class="carousel-slide w-1/2 flex-shrink-0 h-full relative">
-                    <img src="assets/limonbg.png" alt="Frutico Limón" 
+                    <img src="assets/naranjaBG.png" alt="Frutico Limón" 
                          class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    
+                    <!-- Imagen de limón con transición desde la derecha -->
+                    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 transition-transform duration-1000 ease-out" style="transform: translateX(70%); opacity: 0; visibility: hidden;">
+                        <img src="assets/Fruticos.png" alt="Limón Frutico" 
+                             class="h-[50rem] w-auto object-contain drop-shadow-2xl">
+                    </div>
+                    
                     <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                         <h3 class="text-5xl md:text-7xl font-bold font-handwritten mb-4 text-yellow-200">Frutico Limón</h3>
                         <p class="text-xl md:text-2xl text-yellow-100 mb-6">¡Ácido y Refrescante!</p>
@@ -93,6 +84,13 @@
                     <img src="assets/piñaBG.png" alt="Frutico Piña" 
                          class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    
+                    <!-- Imagen de piña con transición desde la izquierda -->
+                    <div class="absolute top-1/2 left-0 transform -translate-y-1/2 transition-transform duration-1000 ease-out" style="transform: translateX(-70%); opacity: 0; visibility: hidden;">
+                        <img src="assets/Frutico.png" alt="Piña Frutico" 
+                             class="h-[50rem] w-auto object-contain drop-shadow-2xl">
+                    </div>
+                    
                     <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                         <h3 class="text-5xl md:text-7xl font-bold font-handwritten mb-4 text-yellow-200">Frutico Piña</h3>
                         <p class="text-xl md:text-2xl text-yellow-100 mb-6">¡Tropical y Dulce!</p>
@@ -168,6 +166,35 @@
                     dot.classList.add('bg-white/50');
                 }
             });
+            
+            // Animate images for each slide
+            const slides = document.querySelectorAll('.carousel-slide');
+            slides.forEach((slide, index) => {
+                const imageContainer = slide.querySelector('.absolute:nth-child(3)');
+                if (imageContainer) {
+                    if (index === currentSlide) {
+                        // Show image with animation
+                        imageContainer.style.opacity = '1';
+                        imageContainer.style.visibility = 'visible';
+                        setTimeout(() => {
+                            if (index === 0) { // Limón - from right
+                                imageContainer.style.transform = 'translateX(0) translateY(-50%)';
+                            } else { // Piña - from left
+                                imageContainer.style.transform = 'translateX(0) translateY(-50%)';
+                            }
+                        }, 500);
+                    } else {
+                        // Hide image completely
+                        imageContainer.style.opacity = '0';
+                        imageContainer.style.visibility = 'hidden';
+                        if (index === 0) { // Limón - hide to right
+                            imageContainer.style.transform = 'translateX(70%) translateY(-50%)';
+                        } else { // Piña - hide to left
+                            imageContainer.style.transform = 'translateX(-70%) translateY(-50%)';
+                        }
+                    }
+                }
+            });
         }
         
         function nextSlide() {
@@ -192,7 +219,7 @@
         });
         
         // Auto-play carousel
-        setInterval(nextSlide, 5000);
+        setInterval(nextSlide, 8000);
         
         // Initialize
         updateCarousel();

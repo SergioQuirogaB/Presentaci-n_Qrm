@@ -57,16 +57,37 @@
         <!-- Carousel Container -->
         <div class="relative h-full">
             <!-- Carousel Track -->
-            <div id="carousel-track" class="flex h-full transition-transform duration-700 ease-in-out" style="width: 400%;">
-                <!-- Slide 1: Fresa -->
-                <div class="carousel-slide w-1/4 flex-shrink-0 h-full relative">
+            <div id="carousel-track" class="flex h-full transition-transform duration-700 ease-in-out" style="width: 500%;">
+                <!-- Slide 1: Naranja -->
+                <div class="carousel-slide w-1/5 flex-shrink-0 h-full relative">
+                    <img src="assets/Fruti.png" alt="Fruti Ice Naranja" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    
+                    <!-- Imagen de naranja con transición desde la derecha -->
+                    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 transition-transform duration-1000 ease-out" style="transform: translateX(70%); opacity: 0; visibility: hidden;">
+                        <img src="assets/MoraAzul.png" alt="Naranja Fruti Ice" 
+                             class="h-[50rem] w-auto object-contain drop-shadow-2xl">
+                    </div>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                        <h3 class="text-5xl md:text-7xl font-bold font-handwritten mb-4 text-orange-200">Fruti Ice</h3>
+                        <p class="text-xl md:text-2xl text-orange-100 mb-6">¡Sabores de Frutas!</p>
+                        <button class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-4 px-8 rounded-full hover:from-orange-600 hover:to-red-600 transform hover:scale-105 transition-all duration-300 text-lg">
+                            Ordenar Ahora
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Fresa -->
+                <div class="carousel-slide w-1/5 flex-shrink-0 h-full relative">
                     <img src="assets/FresaBG.png" alt="Fruti Ice Fresa" 
                          class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                     
                     <!-- Imagen de fresa con transición desde la margen -->
-                    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 transition-transform duration-1000 ease-out hover:translate-x-0" style="transform: translateX(70%);">
-                        <img src="assets/Piña-Photoroom.png" alt="Fresa Fruti Ice" 
+                    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 transition-transform duration-1000 ease-out hover:translate-x-0" style="transform: translateX(70%); opacity: 0; visibility: hidden;">
+                        <img src="assets/fresa.png" alt="Fresa Fruti Ice" 
                              class="h-[50rem] w-auto object-contain drop-shadow-2xl">
                     </div>
                     
@@ -79,11 +100,18 @@
                     </div>
                 </div>
 
-                <!-- Slide 2: Mora Azul -->
-                <div class="carousel-slide w-1/4 flex-shrink-0 h-full relative">
+                <!-- Slide 3: Mora Azul -->
+                <div class="carousel-slide w-1/5 flex-shrink-0 h-full relative">
                     <img src="assets/MoraAzulBG.png" alt="Fruti Ice Mora Azul" 
                          class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    
+                    <!-- Imagen de mora azul con transición desde la izquierda -->
+                    <div class="absolute top-1/2 left-0 transform -translate-y-1/2 transition-transform duration-1000 ease-out" style="transform: translateX(-70%); opacity: 0; visibility: hidden;">
+                        <img src="assets/MoraAzul.png" alt="Mora Azul Fruti Ice" 
+                             class="h-[50rem] w-auto object-contain drop-shadow-2xl">
+                    </div>
+                    
                     <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                         <h3 class="text-5xl md:text-7xl font-bold font-handwritten mb-4 text-blue-200">Fruti Ice Mora Azul</h3>
                         <p class="text-xl md:text-2xl text-blue-100 mb-6">¡Fresco y Rico en Antioxidantes!</p>
@@ -93,11 +121,18 @@
                     </div>
                 </div>
 
-                <!-- Slide 3: Piña -->
-                <div class="carousel-slide w-1/4 flex-shrink-0 h-full relative">
+                <!-- Slide 4: Piña -->
+                <div class="carousel-slide w-1/5 flex-shrink-0 h-full relative">
                     <img src="assets/piñaBG.png" alt="Fruti Ice Piña" 
                          class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    
+                    <!-- Imagen de piña con transición desde la derecha -->
+                    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 transition-transform duration-1000 ease-out" style="transform: translateX(70%); opacity: 0; visibility: hidden;">
+                        <img src="assets/Piña-Photoroom.png" alt="Piña Fruti Ice" 
+                             class="h-[50rem] w-auto object-contain drop-shadow-2xl">
+                    </div>
+                    
                     <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                         <h3 class="text-5xl md:text-7xl font-bold font-handwritten mb-4 text-yellow-200">Fruti Ice Piña</h3>
                         <p class="text-xl md:text-2xl text-yellow-100 mb-6">¡Tropical y Refrescante!</p>
@@ -107,11 +142,18 @@
                     </div>
                 </div>
 
-                <!-- Slide 4: Limón -->
-                <div class="carousel-slide w-1/4 flex-shrink-0 h-full relative">
+                <!-- Slide 5: Limón -->
+                <div class="carousel-slide w-1/5 flex-shrink-0 h-full relative">
                     <img src="assets/limonbg.png" alt="Fruti Ice Limón" 
                          class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    
+                    <!-- Imagen de limón con transición desde la izquierda -->
+                    <div class="absolute top-1/2 left-0 transform -translate-y-1/2 transition-transform duration-1000 ease-out" style="transform: translateX(-70%); opacity: 0; visibility: hidden;">
+                        <img src="assets/Limon.png" alt="Limón Fruti Ice" 
+                             class="h-[50rem] w-auto object-contain drop-shadow-2xl">
+                    </div>
+                    
                     <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                         <h3 class="text-5xl md:text-7xl font-bold font-handwritten mb-4 text-green-200">Fruti Ice Limón</h3>
                         <p class="text-xl md:text-2xl text-green-100 mb-6">¡Ácido y Energizante!</p>
@@ -138,6 +180,7 @@
             <button class="dot w-4 h-4 bg-white/50 rounded-full transition-all duration-300 hover:bg-white" data-slide="1"></button>
             <button class="dot w-4 h-4 bg-white/50 rounded-full transition-all duration-300 hover:bg-white" data-slide="2"></button>
             <button class="dot w-4 h-4 bg-white/50 rounded-full transition-all duration-300 hover:bg-white" data-slide="3"></button>
+            <button class="dot w-4 h-4 bg-white/50 rounded-full transition-all duration-300 hover:bg-white" data-slide="4"></button>
         </div>
     </section>
 
@@ -178,7 +221,7 @@
         let currentSlide = 0;
         
         function updateCarousel() {
-            track.style.transform = `translateX(-${currentSlide * 25}%)`;
+            track.style.transform = `translateX(-${currentSlide * 20}%)`;
             
             // Update dots
             dots.forEach((dot, index) => {
@@ -191,15 +234,34 @@
                 }
             });
             
-            // Animate fresa image when slide 0 is active
-            const fresaImage = document.querySelector('.carousel-slide:nth-child(1) .absolute:nth-child(3)');
-            if (currentSlide === 0) {
-                setTimeout(() => {
-                    fresaImage.style.transform = 'translateX(0) translateY(-50%)';
-                }, 500);
-            } else {
-                fresaImage.style.transform = 'translateX(70%) translateY(-50%)';
-            }
+            // Animate images for each slide
+            const slides = document.querySelectorAll('.carousel-slide');
+            slides.forEach((slide, index) => {
+                const imageContainer = slide.querySelector('.absolute:nth-child(3)');
+                if (imageContainer) {
+                    if (index === currentSlide) {
+                        // Show image with animation
+                        imageContainer.style.opacity = '1';
+                        imageContainer.style.visibility = 'visible';
+                        setTimeout(() => {
+                            if (index === 0 || index === 1 || index === 3) { // Naranja, Fresa and Piña - from right
+                                imageContainer.style.transform = 'translateX(0) translateY(-50%)';
+                            } else { // Mora Azul and Limón - from left
+                                imageContainer.style.transform = 'translateX(0) translateY(-50%)';
+                            }
+                        }, 500);
+                    } else {
+                        // Hide image completely
+                        imageContainer.style.opacity = '0';
+                        imageContainer.style.visibility = 'hidden';
+                        if (index === 0 || index === 1 || index === 3) { // Naranja, Fresa and Piña - hide to right
+                            imageContainer.style.transform = 'translateX(70%) translateY(-50%)';
+                        } else { // Mora Azul and Limón - hide to left
+                            imageContainer.style.transform = 'translateX(-70%) translateY(-50%)';
+                        }
+                    }
+                }
+            });
         }
         
         function nextSlide() {
