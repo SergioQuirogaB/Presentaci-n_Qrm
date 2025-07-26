@@ -63,6 +63,13 @@
                     <img src="assets/FresaBG.png" alt="Fruti Ice Fresa" 
                          class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    
+                    <!-- Imagen de fresa con transición desde la margen -->
+                    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 transition-transform duration-1000 ease-out hover:translate-x-0" style="transform: translateX(70%);">
+                        <img src="assets/Piña-Photoroom.png" alt="Fresa Fruti Ice" 
+                             class="h-[50rem] w-auto object-contain drop-shadow-2xl">
+                    </div>
+                    
                     <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                         <h3 class="text-5xl md:text-7xl font-bold font-handwritten mb-4 text-pink-200">Fruti Ice Fresa</h3>
                         <p class="text-xl md:text-2xl text-pink-100 mb-6">¡Dulce y Jugoso!</p>
@@ -183,6 +190,16 @@
                     dot.classList.add('bg-white/50');
                 }
             });
+            
+            // Animate fresa image when slide 0 is active
+            const fresaImage = document.querySelector('.carousel-slide:nth-child(1) .absolute:nth-child(3)');
+            if (currentSlide === 0) {
+                setTimeout(() => {
+                    fresaImage.style.transform = 'translateX(0) translateY(-50%)';
+                }, 500);
+            } else {
+                fresaImage.style.transform = 'translateX(70%) translateY(-50%)';
+            }
         }
         
         function nextSlide() {
