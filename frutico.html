@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutico - Helados Cremosos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'handwritten': ['Indie Flower', 'cursive'],
+                        'sans': ['Montserrat', 'sans-serif']
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'shimmer': 'shimmer 3s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(251, 191, 36, 0.3); }
+            to { text-shadow: 2px 2px 20px rgba(251, 191, 36, 0.6), 0 0 30px rgba(251, 191, 36, 0.4); }
+        }
+        @keyframes shimmer {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-yellow-100 via-orange-100 to-red-100 min-h-screen font-sans">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold text-yellow-600 font-handwritten">🍨 Frutico</h1>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="fruti-ice.html" class="text-gray-600 hover:text-yellow-600 transition-colors">Fruti Ice</a>
+                    <a href="frutico.html" class="text-yellow-600 font-semibold hover:text-yellow-800 transition-colors">Frutico</a>
+                    <a href="index.html" class="text-gray-600 hover:text-yellow-600 transition-colors">Inicio</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-bold text-yellow-600 font-handwritten animate-glow mb-6">
+                Frutico
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 mb-8 animate-shimmer">
+                Helados cremosos con sabores tropicales
+            </p>
+            <div class="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 text-white py-4 px-8 rounded-full inline-block animate-pulse">
+                <p class="text-lg font-bold">🔥 ¡OFERTA ESPECIAL! 🔥</p>
+                <p class="text-sm">Compra 2 productos y obtén el 3ro al 50% de descuento</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Carousel -->
+    <section class="h-screen relative overflow-hidden">
+        <!-- Carousel Container -->
+        <div class="relative h-full">
+            <!-- Carousel Track -->
+            <div id="carousel-track" class="flex h-full transition-transform duration-700 ease-in-out" style="width: 200%;">
+                <!-- Slide 1: Limón -->
+                <div class="carousel-slide w-1/2 flex-shrink-0 h-full relative">
+                    <img src="assets/limonbg.png" alt="Frutico Limón" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                        <h3 class="text-5xl md:text-7xl font-bold font-handwritten mb-4 text-yellow-200">Frutico Limón</h3>
+                        <p class="text-xl md:text-2xl text-yellow-100 mb-6">¡Ácido y Refrescante!</p>
+                        <button class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold py-4 px-8 rounded-full hover:from-yellow-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 text-lg">
+                            Contactar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Piña -->
+                <div class="carousel-slide w-1/2 flex-shrink-0 h-full relative">
+                    <img src="assets/piñaBG.png" alt="Frutico Piña" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                        <h3 class="text-5xl md:text-7xl font-bold font-handwritten mb-4 text-yellow-200">Frutico Piña</h3>
+                        <p class="text-xl md:text-2xl text-yellow-100 mb-6">¡Tropical y Dulce!</p>
+                        <button class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold py-4 px-8 rounded-full hover:from-yellow-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 text-lg">
+                            Contactar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <button id="prev-btn" class="absolute left-8 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-4 rounded-full backdrop-blur-sm transition-all duration-300 z-10 hover:scale-110">
+                <i class="fas fa-chevron-left text-2xl"></i>
+            </button>
+            <button id="next-btn" class="absolute right-8 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-4 rounded-full backdrop-blur-sm transition-all duration-300 z-10 hover:scale-110">
+                <i class="fas fa-chevron-right text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Dots Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-4 z-20">
+            <button class="dot w-4 h-4 bg-white/50 rounded-full transition-all duration-300 hover:bg-white" data-slide="0"></button>
+            <button class="dot w-4 h-4 bg-white/50 rounded-full transition-all duration-300 hover:bg-white" data-slide="1"></button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 backdrop-blur-md py-12 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-yellow-600 mb-4">Contáctanos</h3>
+                <div class="space-y-2 text-gray-600">
+                    <p>Email: <a href="mailto:info@frutico.com" class="text-yellow-600 hover:text-yellow-800">info@frutico.com</a></p>
+                    <p>Teléfono: <a href="tel:+1234567890" class="text-yellow-600 hover:text-yellow-800">+1 (234) 567-890</a></p>
+                    <p>Dirección: 123 Calle Helado, Ciudad Dulce, CA 90210</p>
+                </div>
+            </div>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-yellow-600 hover:text-yellow-800 text-2xl transition-colors">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" class="text-yellow-600 hover:text-yellow-800 text-2xl transition-colors">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-yellow-600 hover:text-yellow-800 text-2xl transition-colors">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">© 2024 Frutico. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        const track = document.getElementById('carousel-track');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        
+        let currentSlide = 0;
+        
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 50}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.remove('bg-white/50');
+                    dot.classList.add('bg-white');
+                } else {
+                    dot.classList.remove('bg-white');
+                    dot.classList.add('bg-white/50');
+                }
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateCarousel();
+            });
+        });
+        
+        // Auto-play carousel
+        setInterval(nextSlide, 5000);
+        
+        // Initialize
+        updateCarousel();
+    </script>
+</body>
+</html> 
